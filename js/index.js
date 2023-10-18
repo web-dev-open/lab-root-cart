@@ -1,3 +1,6 @@
+
+// ITERATION 1
+
 // Function to update the subtotal for a single product
 function updateSubtotal(product) {
   // Step 1: Get DOM Elements for Price and Quantity
@@ -7,6 +10,8 @@ function updateSubtotal(product) {
   // Step 2: Extract Values from DOM Elements
   const priceValue = parseFloat(price.innerHTML.slice(1)); // Remove the '$' symbol
   const quantityValue = parseFloat(quantityInput.value);
+   
+  // ITERATION 2
 
   // Step 3: Calculate the Subtotal
   const subtotal = priceValue * quantityValue;
@@ -20,6 +25,8 @@ function updateSubtotal(product) {
   // Step 6: Return the Subtotal Value (optional)
   return subtotal;
 }
+
+// ITERATION 3
 
 // Function to calculate all subtotals for each product
 function calculateAll() {
@@ -39,6 +46,7 @@ function calculateAll() {
   // Update the DOM with the total price
   totalElement.querySelector('span').textContent = `$${total.toFixed(2)}`;
 }
+// ITERATION 4
 
 // Function to remove a product
 function removeProduct(event) {
@@ -61,6 +69,8 @@ document.querySelectorAll('.btn-remove').forEach((button) => {
 // Add click event handler to "Create Product" button
 const createProductButton = document.getElementById('create');
 createProductButton.addEventListener('click', createProduct);
+
+// ITERATION 
 
 // Function to create a new product
 function createProduct() {
@@ -117,5 +127,5 @@ window.addEventListener('load', () => {
   const calculatePricesBtn = document.getElementById('calculate');
   calculatePricesBtn.addEventListener('click', calculateAll);
 
-  //... your code goes here
+ 
 });
