@@ -31,8 +31,7 @@ function calculateAll() {
 // ITERATION 4
 
 function removeProduct(event) {
-  const target = event.currentTarget;
-  console.log('The target in remove is:', target);
+    event.target.closest('.product').remove();
   //... your code goes here
 }
 
