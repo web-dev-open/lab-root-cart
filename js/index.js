@@ -79,10 +79,30 @@ function calculateAll() {
 
 // ITERATION 4
 
+// Getting all the remove buttons
+const removeBtns = document.querySelectorAll(".btn-remove");
+
+// Adding click event to each button
+removeBtns.forEach(btn => {
+  btn.addEventListener("click", removeProduct);
+});
+
 function removeProduct(event) {
   const target = event.currentTarget;
   console.log('The target in remove is:', target);
-  //... your code goes here
+  
+  // Getting the button that was clicked
+  const btn = event.currentTarget;
+
+  // Getting its parent row
+  const currentRow = btn.parentNode.parentNode;
+
+  // Removing from the table
+  currentRow.parentNode.removeChild(currentRow);
+
+  // Calling calculateAll to recalculate the table
+  calculateAll();
+
 }
 
 // ITERATION 5
