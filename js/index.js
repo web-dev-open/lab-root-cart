@@ -5,15 +5,15 @@ function updateSubtotal(product) {
 
   // Step 1
   // Getting the price element
-  const priceElement = product.querySelector(".price, span");
+  const priceElement = product.querySelector(".price span");
 
   // Getting the quantity element
-  const quantityElement = product.querySelector(".quantity,");
+  const quantityElement = product.querySelector(".quantity input");
 
   // Step 2
   // Extracting the values
-  const price = parseFloat(priceElement.textConent);
-  const quantity = quantityElement.value;
+  const price = parseFloat(priceElement.textContent);
+  const quantity = parseInt(quantityElement.value);
 
   // Step 3
   // Calculating the subtotal
@@ -21,11 +21,11 @@ function updateSubtotal(product) {
 
   // Step 4
   // Getting the subtotal value
-  const subtotalELement = product.querySelector(".subtotal");
+  const subtotalElement = product.querySelector(".subtotal span");
 
   // Step 5
   // Updating the subtotal value
-  parseFloat(subtotalELement.textConent) = subtotal;
+  subtotalElement.textContent = subtotal.toFixed(2);
 
   // Returning the value
   return subtotal;
@@ -35,13 +35,34 @@ function updateSubtotal(product) {
 
 function calculateAll() {
   // code in the following two lines is added just for testing purposes.
+  
+  /*
   // it runs when only iteration 1 is completed. at later point, it can be removed.
   const singleProduct = document.querySelector('.product');
   updateSubtotal(singleProduct);
   // end of test
+  */
 
   // ITERATION 2
-  //... your code goes here
+  // Getting all products rows
+  const allProducts = document.getElementsByClassName("product");
+
+  // Looping througth each row
+  for(let i = 0; i < allProducts.length; i++) {
+
+    // current row
+    const currentRow = allProducts[i];
+
+    // Call updateSubtotal() to update current row
+    const subtotal = updateSubtotal(currentRow);
+
+    // Getting the subtotal value for the current row
+    const subtotalElement = currentRow.querySelector(".subtotal span");
+
+    // Updating the subtotal considering 2 decimals
+    subtotalElement.textContent = subtotal.toFixed(2);
+
+  }
 
   // ITERATION 3
   //... your code goes here
