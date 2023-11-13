@@ -47,6 +47,9 @@ function calculateAll() {
   // Getting all products rows
   const allProducts = document.getElementsByClassName("product");
 
+  // Creating total variable and initialice to update total for Iteration 3
+  let total = 0; // Pay close attention to make it with let not const since we need to update the value
+
   // Looping througth each row
   for(let i = 0; i < allProducts.length; i++) {
 
@@ -62,10 +65,16 @@ function calculateAll() {
     // Updating the subtotal considering 2 decimals
     subtotalElement.textContent = subtotal.toFixed(2);
 
+    // Updating the total
+    total += subtotal;
+
   }
 
   // ITERATION 3
-  //... your code goes here
+  // Updating the DOM 
+  const totalElement = document.getElementById("total-value").querySelector("span");
+  totalElement.textContent = total.toFixed(2);
+
 }
 
 // ITERATION 4
