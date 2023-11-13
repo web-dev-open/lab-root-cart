@@ -3,8 +3,35 @@
 function updateSubtotal(product) {
   console.log('Calculating subtotal, yey!');
 
-  //... your code goes here
+  // Step 1
+  // Getting the price element
+  const priceElement = product.querySelector(".price, span");
+
+  // Getting the quantity element
+  const quantityElement = product.querySelector(".quantity,");
+
+  // Step 2
+  // Extracting the values
+  const price = parseFloat(priceElement.textConent);
+  const quantity = quantityElement.value;
+
+  // Step 3
+  // Calculating the subtotal
+  const subtotal = price * quantity;
+
+  // Step 4
+  // Getting the subtotal value
+  const subtotalELement = product.querySelector(".subtotal");
+
+  // Step 5
+  // Updating the subtotal value
+  parseFloat(subtotalELement.textConent) = subtotal;
+
+  // Returning the value
+  return subtotal;
+
 }
+
 
 function calculateAll() {
   // code in the following two lines is added just for testing purposes.
