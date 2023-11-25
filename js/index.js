@@ -13,13 +13,13 @@ function updateSubtotal(product) {
   var quantity = product.querySelector('.quantity input');
 
   //extract values using innerHTML
-  var price = price.innerHTML;
-  var quantity = quantity.value;
+  const priceValue = parseFloat(price.innerHTML);
+  const quantityValue = parseFloat(quantity.value);
 
-  var subtotal = price * quantity;
+  const subtotal = priceValue * quantityValue;
 
   //update subtotal in DOM
-  var subtotalElement = product.querySelector('.subtotal span');
+  const subtotalElement = product.querySelector('.subtotal span');
   subtotalElement.innerHTML = subtotal;
 
   //var subtotal = document.getElementsByClassName('.total-value');
@@ -38,16 +38,22 @@ function calculateAll() {
 
   // ITERATION 2
   //... your code goes here
-  var total = 0;
-  var products = document.getElementsByClassName('product');
-  for (var i = 0; i < products.length; i++) {
-    total += updateSubtotal(products[i]);
+  
+  const products = document.getElementsByClassName('product');
+  let total = 0;
+  for (let i = 0; i < products.length; i++) {
+    const subtotal = updateSubtotal(products[i]);
+    total += subtotal;
   }
 
   // ITERATION 3
   //... your code goes here
-  var totalValue = document.getElementById('total-value');
-  totalValue.innerHTML = "Total: $" +total;
+  const totalValue = document.getElementById('total-value');
+  if (totalValue) {
+    totalValue.innerHTML = "Total: $" + total; // Fix: Ensure to format the total as a currency
+  } else {
+    console.log("Total value element not found.");
+  }
 
   return total;
 }
@@ -59,8 +65,12 @@ function removeProduct(event) {
   console.log('The target in remove is:', target);
   //... your code goes here
 
-  var product = target.parentNode.parentNode;
-  product.parentNode.removeChild(product);
+  const product = target.parentNode.parentNode;
+  //product.parentNode.removeChild(product);
+
+  // const tableBody = document.getElementsByTagName('tbody')[0];
+  // tableBody.removeChild(product);
+  // calculateAll();
 
   if(product){
     product.parentNode.removeChild(product);
@@ -72,7 +82,7 @@ function removeProduct(event) {
   
 }
 
-var removeButtons = document.getElementsByClassName('btn btn-remove');
+var removeButtons = document.getElementsByClassName('btn-remove');
 
 for (var i=0; i<removeButtons.length; i++) {
   removeButtons[i].addEventListener('click', removeProduct);
@@ -84,11 +94,11 @@ function createProduct() {
 
   //... your code goes here
   // Get the input values for the new product
-  var nameInput = document.querySelector('.create-product input[type="text"]');
-  var priceInput = document.querySelector('.create-product input[type="number"]');
+  const nameInput = document.querySelector('.create-product input[type="text"]');
+  const priceInput = document.querySelector('.create-product input[type="number"]');
 
-  var name = nameInput.value;
-  var price = parseFloat(priceInput.value);
+  const name = nameInput.value;
+  const price = parseFloat(priceInput.value);
 
   // Validate input values
   if (!name || isNaN(price)) {
@@ -97,27 +107,27 @@ function createProduct() {
   }
 
   // Create a new row for the new product
-  var cartTable = document.getElementById('cart');
-  var newRow = cartTable.insertRow(cartTable.rows.length - 1);
+  const cartTable = document.getElementById('cart');
+  const newRow = cartTable.insertRow(cartTable.rows.length - 1);
 
   // Insert cells with product details
-  var nameCell = newRow.insertCell(0);
+  const nameCell = newRow.insertCell(0);
   nameCell.innerHTML = '<span class="name">' + name + '</span>';
 
-  var priceCell = newRow.insertCell(1);
-  priceCell.innerHTML = '$<span class="price">' + price.toFixed(2) + '</span>';
+  const priceCell = newRow.insertCell(1);
+  priceCell.innerHTML = '$<span class="price">' + price + '</span>';
 
-  var quantityCell = newRow.insertCell(2);
+  const quantityCell = newRow.insertCell(2);
   quantityCell.innerHTML = '<input type="number" value="1" class="quantity">';
 
-  var subtotalCell = newRow.insertCell(3);
+  const subtotalCell = newRow.insertCell(3);
   subtotalCell.innerHTML = '$<span class="subtotal">0.00</span>'; // Initial subtotal is 0
 
-  var removeCell = newRow.insertCell(4);
-  removeCell.innerHTML = '<button class="btn btn-remove">Remove</button>';
+  const removeCell = newRow.insertCell(4);
+  removeCell.innerHTML = '<button class="btn-remove">Remove</button>';
 
   // Add event listener to the new "Remove" button
-  var removeButton = removeCell.querySelector('.btn-remove');
+  const removeButton = removeCell.querySelector('.btn-remove');
   removeButton.addEventListener('click', removeProduct);
 
   // Clear input fields
@@ -129,9 +139,13 @@ function createProduct() {
 }
 
 // Add click event listener to the "Create Product" button
-var createButton = document.getElementById('create');
+const createButton = document.getElementById('create');
 createButton.addEventListener('click', createProduct);
 
+const quantityInputs = document.getElementsByClassName('quantity');
+for (var i = 0; i < quantityInputs.length; i++) {
+  quantityInputs[i].addEventListener('input', calculateAll);
+}
 
 
 window.addEventListener('load', () => {
