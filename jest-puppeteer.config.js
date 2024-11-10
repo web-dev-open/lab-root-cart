@@ -1,6 +1,5 @@
 module.exports = {
-  server: {
-    command: 'serve . -l 4444',
-    port: 4444
-  }
+  preset: 'jest-puppeteer',
+  testMatch: ['**/tests/**/*.spec.js'],
+  setupFilesAfterEnv: ['<rootDir>/setupTests.js'], // Optional: if you have a setup file
 };
